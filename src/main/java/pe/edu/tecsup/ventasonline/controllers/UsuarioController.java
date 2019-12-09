@@ -44,5 +44,21 @@ public class UsuarioController {
 		
 		return usuarios;
 	}
+	
+	@PostMapping("/usuarios")
+	public Usuario crear( @RequestParam("Nombre_u") String Nombre_u,@RequestParam("Apellidos_u") String Apellidos_u,@RequestParam("DNI_u") String password_usu,@RequestParam("DNI_u") int DNI_u,@RequestParam("Gmail_u") String Gmail_u,@RequestParam("Direccion_u") String Direccion_u,@RequestParam("Celular_u") int Celular,@RequestParam("Password_u") String Password_u) throws Exception {
+		logger.info("call crear(" + Nombre_u + ", " + Apellidos_u + ", " + DNI_u + ", " + Gmail_u + ", " + Direccion_u + ", " + Celular + "," + Password_u + ")");
+		
+		Usuario usuario = new Usuario();
+		usuario.setApellidos_u(Apellidos_u);
+		usuario.setNombre_u(Nombre_u);
+		usuario.setDNI_u(DNI_u);
+		usuario.setGmail_u(Gmail_u);
+		usuario.setDireccion_u(Direccion_u);
+		usuario.setCelular_u(Celular);
+		usuario.setPassword_u(Password_u);
+		usuarioService.save(usuario);
+		return usuario;
+	}
 
 }

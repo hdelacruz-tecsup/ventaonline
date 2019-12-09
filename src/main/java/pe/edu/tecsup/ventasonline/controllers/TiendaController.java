@@ -70,8 +70,13 @@ public class TiendaController {
 
 	
 	@PostMapping("/tienda")
-	public Tienda crear(@RequestParam(name="Imagen_ti", required=false) MultipartFile Imagen_ti, @RequestParam("Nombre_ti") String Nombre_ti,@RequestParam("Fechaini_ti") Date Fechaini_ti,@RequestParam("Ruc_ti") Long Ruc_ti,@RequestParam("Descripcion_ti") String Descripcion_ti,@RequestParam("Categoria_ti") String Categoria_ti,@RequestParam("id_usuariot") Long idusuariot) throws Exception {
-	logger.info("call crear(" + Imagen_ti + ", " + Nombre_ti + ", " + Fechaini_ti + ", " + Ruc_ti + ", " + Descripcion_ti + ","+ Categoria_ti +","+ idusuariot +")");
+	public Tienda crear(@RequestParam(name="Imagen_ti", required=false) MultipartFile Imagen_ti,
+			@RequestParam("Nombre_ti") String Nombre_ti,@RequestParam("Fechaini_ti") Date Fechaini_ti,
+			@RequestParam("Ruc_ti") Long Ruc_ti,@RequestParam("Descripcion_ti") String Descripcion_ti,
+			@RequestParam("Categoria_ti") String Categoria_ti,
+			@RequestParam("id_usuariot") Long id_usuariot) throws Exception {
+	logger.info("call crear(" + Imagen_ti + ", " + Nombre_ti + ", " + Fechaini_ti + ", " + Ruc_ti + ", "
+			+ "" + Descripcion_ti + ","+ Categoria_ti +","+ id_usuariot +")");
 
 	Tienda tienda = new Tienda();
 	tienda.setNombre_ti(Nombre_ti);
@@ -79,7 +84,7 @@ public class TiendaController {
 	tienda.setRuc_ti(Ruc_ti);
 	tienda.setDescripcion_ti(Descripcion_ti);
 	tienda.setCategoria_ti(Categoria_ti);
-	tienda.setId_usuariot(idusuariot);
+	tienda.setId_usuariot(id_usuariot);
 		
 		if (Imagen_ti != null && !Imagen_ti.isEmpty()) {
 			String filename = System.currentTimeMillis() + Imagen_ti.getOriginalFilename().substring(Imagen_ti.getOriginalFilename().lastIndexOf("."));
@@ -113,6 +118,7 @@ public class TiendaController {
 		
 		return tienda;
 	}
+	
 	
 	@PutMapping("/tienda/{id_ti}")
     public ResponseEntity<?> updatetienda(@PathVariable(value ="id_ti")Long id_ti,@RequestBody Tienda tienda) {

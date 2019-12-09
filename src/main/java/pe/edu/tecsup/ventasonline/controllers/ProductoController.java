@@ -116,7 +116,7 @@ public class ProductoController {
 	}
 
 	@PutMapping("/productos/{id_p}")
-    public ResponseEntity<?> updateEnfermedad(@PathVariable(value ="id_p")Long id_p,@RequestBody Producto producto) {
+    public ResponseEntity<?> updaProducto(@PathVariable(value ="id_p")Long id_p,@RequestBody Producto producto) {
        
 		//enfermedadService.updateById(id);
     Producto enf= null;
