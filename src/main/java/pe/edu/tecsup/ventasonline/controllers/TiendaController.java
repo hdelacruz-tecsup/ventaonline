@@ -5,7 +5,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.Date;
 import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +24,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import pe.edu.tecsup.ventasonline.entities.Tienda;
-import pe.edu.tecsup.ventasonline.repositories.TiendaRepository;
 import pe.edu.tecsup.ventasonline.services.TiendaService;
 
 @RestController
@@ -135,22 +133,6 @@ public class TiendaController {
 		  return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 	   }
     }
-	
-	@PutMapping("tienda/{id_ti}")
-	public Tienda updaterTienda(@RequestBody Tienda tienda, @PathVariable Long id_ti){
-		return tiendaService.findById(id_ti).(tie ->{
-			tie.setNombre_ti(tienda.getNombre_ti());
-			tie.setFechaini_ti(tienda.getFechaini_ti());
-			tie.setRuc_ti(tienda.getRuc_ti());
-			tie.setCategoria_ti(tienda.getCategoria_ti());
-			tie.setDescripcion_ti(tienda.getDescripcion_ti());
-			return tiendaService.save(tie);
-		}).orElseGet(() ->{
-			tienda.setId_ti(id_ti);
-			return tiendaService.save(tie);
-		});
-		
-	}
 	
 }
 
