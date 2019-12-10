@@ -5,9 +5,12 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,10 +18,12 @@ import pe.edu.tecsup.ventasonline.entities.Usuario;
 import pe.edu.tecsup.ventasonline.services.UsuarioService;
 
 @RestController
-@RequestMapping("/auth")
 public class UsuarioController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(UsuarioController.class);
+	
+	@Value("${app.storage.path}")
+	private String STORAGEPATH;
 	
 	@Autowired
     private UsuarioService usuarioService;
@@ -60,5 +65,21 @@ public class UsuarioController {
 		usuarioService.save(usuario);
 		return usuario;
 	}
+	
+	@DeleteMapping("/usuarios/{id_u}")
+	public ResponseEntity<String> eliminar(@PathVariable Long id_u) {
+		logger.info("call eliminar: " + id_u);
+		
+		usuarioService.deleteById(id_u);
+		
+		return ResponseEntity.ok().body("Registro eliminado");
+	}
+	
+	@GetMapping("/usuarios/{id_u}")
+	public Usuario obtener(@PathVariable Long id_u) {
+		logger.info("call obtener: " + id_u);
+		Usuario usuarios = usuarioService.findById(id_u);
+		return usuarios;
+	}	
 
 }

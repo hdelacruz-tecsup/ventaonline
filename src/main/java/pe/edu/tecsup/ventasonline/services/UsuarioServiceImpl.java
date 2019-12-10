@@ -2,6 +2,7 @@ package pe.edu.tecsup.ventasonline.services;
 
 import java.util.List;
 
+import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,19 +36,19 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 	@Override
 	public Usuario findById(Long id_u) {
-		// TODO Auto-generated method stub
-		return null;
+		return usuarioRepository.findById(id_u).orElseThrow(() -> new EntityNotFoundException("No existe registro"));
+
 	}
 
 	@Override
 	public void save(Usuario usuarios) {
-		// TODO Auto-generated method stub
+		usuarioRepository.save(usuarios);
 		
 	}
 
 	@Override
 	public void deleteById(Long id_u) {
-		// TODO Auto-generated method stub
+		usuarioRepository.deleteById(id_u);
 		
 	}
 
