@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import pe.edu.tecsup.ventasonline.entities.LoginRequest;
 import pe.edu.tecsup.ventasonline.entities.Usuario;
 import pe.edu.tecsup.ventasonline.services.UsuarioService;
 
@@ -30,12 +29,12 @@ public class UsuarioController {
     private UsuarioService usuarioService;
 
 	@PostMapping("login")
-	public Usuario login(@RequestParam LoginRequest loginrequest)throws Exception{
-		logger.info("login("+loginrequest.getGmail_u()+", "+loginrequest.getPassword_u());
-		String Gmail_u = loginrequest.getGmail_u();
-		String Password_u = loginrequest.getPassword_u();
-	//public Usuario login(@RequestParam String Gmail_u, @RequestParam String Password_u) throws Exception{
-		//logger.info("login("+Gmail_u+", "+Password_u+")");
+	//public Usuario login(@RequestBody LoginRequest loginRequest)throws Exception{
+	//logger.info("login("+loginRequest.getGmail_u()+", "+loginRequest.getPassword_u());
+//	String Gmail_u = loginRequest.getGmail_u();
+	//String Password_u = loginRequest.getPassword_u();
+	public Usuario login(@RequestParam String Gmail_u, @RequestParam String Password_u) throws Exception{
+		logger.info("login("+Gmail_u+", "+Password_u+")");
 		
 		Usuario usuario = usuarioService.findByUsernameAndPassword(Gmail_u, Password_u);
 		logger.info("Login success: " + usuario);

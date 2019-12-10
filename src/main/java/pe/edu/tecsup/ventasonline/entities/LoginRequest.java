@@ -1,5 +1,6 @@
 package pe.edu.tecsup.ventasonline.entities;
 
+
 public class LoginRequest {
 
 	
